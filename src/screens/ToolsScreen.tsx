@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import { useNavigation } from '@react-navigation/native';
 import { ScreenContainer } from '../components/ScreenContainer';
+import { PageHeader } from '../components/PageHeader';
 import { Card } from '../components/Card';
 import { useTheme } from '../context/ThemeContext';
 import { TYPOGRAPHY, SPACING, BORDER_RADIUS } from '../constants/theme';
@@ -20,9 +21,7 @@ export const ToolsScreen = () => {
 
   return (
     <ScreenContainer>
-      <View style={[styles.headerContainer, { borderBottomColor: colors.border, backgroundColor: colors.surface }]}>
-        <Text style={[styles.headerTitle, { color: colors.text }]}>Tools</Text>
-      </View>
+      <PageHeader title="Tools" iconName="grid" />
       <ScrollView style={styles.container} contentContainerStyle={{ padding: SPACING.lg }}>
         
         <Text style={[styles.sectionTitle, { color: colors.textSecondary }]}>ORGANIZE</Text>
@@ -49,14 +48,6 @@ export const ToolsScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  headerContainer: {
-    paddingHorizontal: SPACING.lg,
-    paddingVertical: SPACING.md,
-    borderBottomWidth: 1,
-  },
-  headerTitle: {
-    ...TYPOGRAPHY.h2,
   },
   sectionTitle: {
     ...TYPOGRAPHY.caption,

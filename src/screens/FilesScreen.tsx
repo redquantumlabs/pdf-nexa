@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/Feather';
 import { pick, types, isErrorWithCode, errorCodes } from '@react-native-documents/picker';
 import { useNavigation } from '@react-navigation/native';
 import { ScreenContainer } from '../components/ScreenContainer';
+import { PageHeader } from '../components/PageHeader';
 import { useTheme } from '../context/ThemeContext';
 import { TYPOGRAPHY, SPACING } from '../constants/theme';
 
@@ -33,13 +34,16 @@ export const FilesScreen = () => {
 
   return (
     <ScreenContainer>
-      <View style={styles.header}>
-        <Text style={[styles.title, { color: colors.text }]}>Files</Text>
-        <View style={styles.headerActions}>
-          <Icon name="search" size={24} color={colors.text} style={styles.icon} />
-          <Icon name="filter" size={24} color={colors.text} />
-        </View>
-      </View>
+      <PageHeader 
+        title="Files" 
+        iconName="folder" 
+        rightComponent={
+          <>
+            <Icon name="search" size={24} color={colors.text} style={styles.icon} />
+            <Icon name="filter" size={24} color={colors.text} />
+          </>
+        }
+      />
 
       <View style={styles.content}>
         <View style={styles.emptyStateContainer}>
@@ -62,18 +66,6 @@ export const FilesScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: SPACING.lg,
-  },
-  title: {
-    ...TYPOGRAPHY.h2,
-  },
-  headerActions: {
-    flexDirection: 'row',
-  },
   icon: {
     marginRight: SPACING.lg,
   },

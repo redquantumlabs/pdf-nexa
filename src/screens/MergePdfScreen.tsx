@@ -5,6 +5,7 @@ import { pick, types } from '@react-native-documents/picker';
 import { useNavigation } from '@react-navigation/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ScreenContainer } from '../components/ScreenContainer';
+import { PageHeader } from '../components/PageHeader';
 import { Button } from '../components/Button';
 import { useTheme } from '../context/ThemeContext';
 import { TYPOGRAPHY, SPACING, BORDER_RADIUS } from '../constants/theme';
@@ -91,12 +92,11 @@ export const MergePdfScreen = () => {
 
   return (
     <ScreenContainer>
-      <View style={[styles.headerContainer, { borderBottomColor: colors.border, backgroundColor: colors.surface }]}>
-        <Text style={[styles.title, { color: colors.text }]}>Merge PDF</Text>
-        <Text style={[styles.subtitle, { color: colors.textSecondary }]}>
-          Add files and reorder them before merging.
-        </Text>
-      </View>
+      <PageHeader 
+        title="Merge PDF" 
+        subtitle="Add files and reorder them before merging." 
+        iconName="layers" 
+      />
       
       <View style={styles.container}>
         
@@ -141,13 +141,6 @@ export const MergePdfScreen = () => {
 
 const styles = StyleSheet.create({
   container: { flex: 1 },
-  headerContainer: {
-    paddingHorizontal: SPACING.lg,
-    paddingVertical: SPACING.md,
-    borderBottomWidth: 1,
-  },
-  title: { ...TYPOGRAPHY.h2 },
-  subtitle: { ...TYPOGRAPHY.body2, marginTop: SPACING.xs },
   listContent: { padding: SPACING.lg, paddingBottom: 100 },
   fileRow: {
     flexDirection: 'row',

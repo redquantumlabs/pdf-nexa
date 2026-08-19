@@ -4,6 +4,7 @@ import { pick, types, isErrorWithCode, errorCodes } from '@react-native-document
 import { useNavigation } from '@react-navigation/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ScreenContainer } from '../components/ScreenContainer';
+import { PageHeader } from '../components/PageHeader';
 import { Button } from '../components/Button';
 import { Card } from '../components/Card';
 import { useTheme } from '../context/ThemeContext';
@@ -67,12 +68,11 @@ export const RotatePagesScreen = () => {
 
   return (
     <ScreenContainer>
-      <View style={[styles.headerContainer, { borderBottomColor: colors.border, backgroundColor: colors.surface }]}>
-        <Text style={[styles.title, { color: colors.text }]}>Rotate Pages</Text>
-        <Text style={[styles.subtitle, { color: colors.textSecondary }]}>
-          Rotate specific pages in a PDF document.
-        </Text>
-      </View>
+      <PageHeader 
+        title="Rotate Pages" 
+        subtitle="Rotate specific pages in a PDF document." 
+        iconName="rotate-cw" 
+      />
       
       <View style={styles.container}>
         
@@ -130,13 +130,6 @@ export const RotatePagesScreen = () => {
 
 const styles = StyleSheet.create({
   container: { flex: 1 },
-  headerContainer: {
-    paddingHorizontal: SPACING.lg,
-    paddingVertical: SPACING.md,
-    borderBottomWidth: 1,
-  },
-  title: { ...TYPOGRAPHY.h2 },
-  subtitle: { ...TYPOGRAPHY.body2, marginTop: SPACING.xs },
   content: { padding: SPACING.lg, paddingBottom: 100 },
   card: { padding: SPACING.lg },
   fileName: { ...TYPOGRAPHY.body1, fontWeight: 'bold', marginBottom: SPACING.sm, textAlign: 'center' },
