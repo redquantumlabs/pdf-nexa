@@ -20,8 +20,10 @@ export const ToolsScreen = () => {
 
   return (
     <ScreenContainer>
-      <ScrollView style={styles.container} contentContainerStyle={{ padding: SPACING.lg }}>
+      <View style={[styles.headerContainer, { borderBottomColor: colors.border, backgroundColor: colors.surface }]}>
         <Text style={[styles.headerTitle, { color: colors.text }]}>Tools</Text>
+      </View>
+      <ScrollView style={styles.container} contentContainerStyle={{ padding: SPACING.lg }}>
         
         <Text style={[styles.sectionTitle, { color: colors.textSecondary }]}>ORGANIZE</Text>
         <View style={styles.toolsGrid}>
@@ -48,9 +50,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  headerContainer: {
+    paddingHorizontal: SPACING.lg,
+    paddingVertical: SPACING.md,
+    borderBottomWidth: 1,
+  },
   headerTitle: {
     ...TYPOGRAPHY.h2,
-    marginBottom: SPACING.xl,
   },
   sectionTitle: {
     ...TYPOGRAPHY.caption,

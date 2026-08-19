@@ -91,11 +91,14 @@ export const MergePdfScreen = () => {
 
   return (
     <ScreenContainer>
-      <View style={styles.container}>
+      <View style={[styles.headerContainer, { borderBottomColor: colors.border, backgroundColor: colors.surface }]}>
         <Text style={[styles.title, { color: colors.text }]}>Merge PDF</Text>
         <Text style={[styles.subtitle, { color: colors.textSecondary }]}>
           Add files and reorder them before merging.
         </Text>
+      </View>
+      
+      <View style={styles.container}>
         
         <FlatList
           data={selectedFiles}
@@ -138,8 +141,13 @@ export const MergePdfScreen = () => {
 
 const styles = StyleSheet.create({
   container: { flex: 1 },
-  title: { ...TYPOGRAPHY.h2, paddingHorizontal: SPACING.lg, paddingTop: SPACING.lg },
-  subtitle: { ...TYPOGRAPHY.body2, paddingHorizontal: SPACING.lg, paddingBottom: SPACING.lg },
+  headerContainer: {
+    paddingHorizontal: SPACING.lg,
+    paddingVertical: SPACING.md,
+    borderBottomWidth: 1,
+  },
+  title: { ...TYPOGRAPHY.h2 },
+  subtitle: { ...TYPOGRAPHY.body2, marginTop: SPACING.xs },
   listContent: { padding: SPACING.lg, paddingBottom: 100 },
   fileRow: {
     flexDirection: 'row',

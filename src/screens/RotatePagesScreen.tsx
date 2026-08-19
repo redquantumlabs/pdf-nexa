@@ -67,11 +67,14 @@ export const RotatePagesScreen = () => {
 
   return (
     <ScreenContainer>
-      <View style={styles.container}>
+      <View style={[styles.headerContainer, { borderBottomColor: colors.border, backgroundColor: colors.surface }]}>
         <Text style={[styles.title, { color: colors.text }]}>Rotate Pages</Text>
         <Text style={[styles.subtitle, { color: colors.textSecondary }]}>
           Rotate specific pages in a PDF document.
         </Text>
+      </View>
+      
+      <View style={styles.container}>
         
         <ScrollView contentContainerStyle={styles.content}>
           <Card style={styles.card}>
@@ -127,8 +130,13 @@ export const RotatePagesScreen = () => {
 
 const styles = StyleSheet.create({
   container: { flex: 1 },
-  title: { ...TYPOGRAPHY.h2, paddingHorizontal: SPACING.lg, paddingTop: SPACING.lg },
-  subtitle: { ...TYPOGRAPHY.body2, paddingHorizontal: SPACING.lg, paddingBottom: SPACING.lg },
+  headerContainer: {
+    paddingHorizontal: SPACING.lg,
+    paddingVertical: SPACING.md,
+    borderBottomWidth: 1,
+  },
+  title: { ...TYPOGRAPHY.h2 },
+  subtitle: { ...TYPOGRAPHY.body2, marginTop: SPACING.xs },
   content: { padding: SPACING.lg, paddingBottom: 100 },
   card: { padding: SPACING.lg },
   fileName: { ...TYPOGRAPHY.body1, fontWeight: 'bold', marginBottom: SPACING.sm, textAlign: 'center' },

@@ -58,11 +58,14 @@ export const SplitPdfScreen = () => {
 
   return (
     <ScreenContainer>
-      <View style={styles.container}>
+      <View style={[styles.headerContainer, { borderBottomColor: colors.border, backgroundColor: colors.surface }]}>
         <Text style={[styles.title, { color: colors.text }]}>Split PDF</Text>
         <Text style={[styles.subtitle, { color: colors.textSecondary }]}>
           Extract specific pages into a new document.
         </Text>
+      </View>
+      
+      <View style={styles.container}>
         
         <View style={styles.content}>
           <Card style={styles.card}>
@@ -122,8 +125,13 @@ export const SplitPdfScreen = () => {
 
 const styles = StyleSheet.create({
   container: { flex: 1 },
-  title: { ...TYPOGRAPHY.h2, paddingHorizontal: SPACING.lg, paddingTop: SPACING.lg },
-  subtitle: { ...TYPOGRAPHY.body2, paddingHorizontal: SPACING.lg, paddingBottom: SPACING.lg },
+  headerContainer: {
+    paddingHorizontal: SPACING.lg,
+    paddingVertical: SPACING.md,
+    borderBottomWidth: 1,
+  },
+  title: { ...TYPOGRAPHY.h2 },
+  subtitle: { ...TYPOGRAPHY.body2, marginTop: SPACING.xs },
   content: { padding: SPACING.lg },
   card: { padding: SPACING.lg },
   fileName: { ...TYPOGRAPHY.body1, fontWeight: 'bold', marginBottom: SPACING.sm, textAlign: 'center' },
