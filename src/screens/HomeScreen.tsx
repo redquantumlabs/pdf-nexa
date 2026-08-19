@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-nati
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Feather';
 import { ScreenContainer } from '../components/ScreenContainer';
+import { PageHeader } from '../components/PageHeader';
 import { Card } from '../components/Card';
 import { useTheme } from '../context/ThemeContext';
 import { TYPOGRAPHY, SPACING, BORDER_RADIUS } from '../constants/theme';
@@ -42,18 +43,11 @@ export const HomeScreen = () => {
 
   return (
     <ScreenContainer>
+      <PageHeader 
+        title="PDFNexa" 
+        iconName="file-text" 
+      />
       <ScrollView style={styles.container} contentContainerStyle={{ padding: SPACING.lg }}>
-        
-        {/* Header */}
-        <View style={styles.header}>
-          <View style={styles.logoContainer}>
-            <Icon name="file-text" size={32} color={colors.primary} />
-            <Text style={[styles.title, { color: colors.text }]}>PDFNexa</Text>
-          </View>
-          <TouchableOpacity onPress={() => navigation.navigate('Settings')}>
-            <Icon name="settings" size={24} color={colors.textSecondary} />
-          </TouchableOpacity>
-        </View>
 
         {/* Quick Actions */}
         <Text style={[styles.sectionTitle, { color: colors.text }]}>Quick Actions</Text>
@@ -86,20 +80,6 @@ export const HomeScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: SPACING.xl,
-  },
-  logoContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  title: {
-    ...TYPOGRAPHY.h2,
-    marginLeft: SPACING.sm,
   },
   sectionTitle: {
     ...TYPOGRAPHY.h3,

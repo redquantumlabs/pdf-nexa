@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import { ScreenContainer } from '../components/ScreenContainer';
+import { PageHeader } from '../components/PageHeader';
 import { Card } from '../components/Card';
 import { useTheme, ThemeType } from '../context/ThemeContext';
 import { TYPOGRAPHY, SPACING, BORDER_RADIUS } from '../constants/theme';
@@ -24,8 +25,8 @@ export const SettingsScreen = () => {
 
   return (
     <ScreenContainer>
+      <PageHeader title="Settings" iconName="settings" />
       <ScrollView style={styles.container} contentContainerStyle={{ padding: SPACING.lg }}>
-        <Text style={[styles.headerTitle, { color: colors.text }]}>Settings</Text>
         
         <Text style={[styles.sectionTitle, { color: colors.textSecondary }]}>APPEARANCE</Text>
         <Card style={styles.cardContainer}>
@@ -61,10 +62,6 @@ export const SettingsScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  headerTitle: {
-    ...TYPOGRAPHY.h2,
-    marginBottom: SPACING.xl,
   },
   sectionTitle: {
     ...TYPOGRAPHY.caption,
