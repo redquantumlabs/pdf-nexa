@@ -83,14 +83,14 @@ android {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
     }
     signingConfigs {
         debug {
-            storeFile file('debug.keystore')
-            storePassword 'android'
-            keyAlias 'androiddebugkey'
-            keyPassword 'android'
+            storeFile file(' upload-keystore.jks')
+            storePassword 'rql_111'
+            keyAlias 'upload'
+            keyPassword 'rql_111'
         }
     }
     buildTypes {
