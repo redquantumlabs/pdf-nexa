@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Linking } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import { ScreenContainer } from '../components/ScreenContainer';
 import { PageHeader } from '../components/PageHeader';
@@ -14,8 +14,8 @@ export const SettingsScreen = () => {
   const ThemeOption = ({ label, value, isLast = false }: { label: string, value: ThemeType, isLast?: boolean }) => {
     const isSelected = themeType === value;
     return (
-      <TouchableOpacity 
-        style={[styles.subOptionRow, !isLast && { borderBottomColor: colors.border, borderBottomWidth: StyleSheet.hairlineWidth }]} 
+      <TouchableOpacity
+        style={[styles.subOptionRow, !isLast && { borderBottomColor: colors.border, borderBottomWidth: StyleSheet.hairlineWidth }]}
         onPress={() => setThemeType(value)}
       >
         <Text style={[styles.optionText, { color: colors.text }]}>{label}</Text>
@@ -28,11 +28,11 @@ export const SettingsScreen = () => {
     <ScreenContainer>
       <PageHeader title="Settings" iconName="settings" />
       <ScrollView style={styles.container} contentContainerStyle={{ padding: SPACING.lg }}>
-        
+
         <Text style={[styles.sectionTitle, { color: colors.textSecondary, marginTop: 0 }]}>APPEARANCE</Text>
         <Card style={styles.cardContainer}>
-          <TouchableOpacity 
-            style={[styles.optionRow, isThemeExpanded ? { borderBottomWidth: 0 } : { borderBottomColor: colors.border }]} 
+          <TouchableOpacity
+            style={[styles.optionRow, isThemeExpanded ? { borderBottomWidth: 0 } : { borderBottomColor: colors.border }]}
             onPress={() => setIsThemeExpanded(!isThemeExpanded)}
           >
             <View style={styles.rowLeft}>
@@ -46,7 +46,7 @@ export const SettingsScreen = () => {
               <Icon name={isThemeExpanded ? "chevron-up" : "chevron-down"} size={20} color={colors.textSecondary} />
             </View>
           </TouchableOpacity>
-          
+
           {isThemeExpanded && (
             <View style={[styles.expandedContainer, { backgroundColor: colors.background, borderBottomColor: colors.border }]}>
               <ThemeOption label="Light Mode" value="light" />
@@ -58,12 +58,18 @@ export const SettingsScreen = () => {
 
         <Text style={[styles.sectionTitle, { color: colors.textSecondary }]}>ABOUT</Text>
         <Card style={styles.cardContainer}>
-          <TouchableOpacity style={[styles.optionRow, { borderBottomColor: colors.border }]}>
+          <TouchableOpacity
+            style={[styles.optionRow, { borderBottomColor: colors.border }]}
+            onPress={() => Linking.openURL('https://sites.google.com/view/pdfnexalegal/privacy-policy')}
+          >
             <Text style={[styles.optionText, { color: colors.text }]}>Privacy Policy</Text>
             <Icon name="chevron-right" size={20} color={colors.textSecondary} />
           </TouchableOpacity>
           <View style={styles.lastRow}>
-            <TouchableOpacity style={styles.optionRow}>
+            <TouchableOpacity
+              style={[styles.optionRow, { borderBottomColor: colors.border }]}
+              onPress={() => Linking.openURL('https://sites.google.com/view/pdfnexalegal/terms-conditions')}
+            >
               <Text style={[styles.optionText, { color: colors.text }]}>Terms of Use</Text>
               <Icon name="chevron-right" size={20} color={colors.textSecondary} />
             </TouchableOpacity>
