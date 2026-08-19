@@ -6,7 +6,7 @@ import { ScreenContainer } from '../components/ScreenContainer';
 import { Card } from '../components/Card';
 import { useTheme } from '../context/ThemeContext';
 import { TYPOGRAPHY, SPACING, BORDER_RADIUS } from '../constants/theme';
-import DocumentPicker from '@react-native-documents/picker';
+import { pick, types, isErrorWithCode, errorCodes } from '@react-native-documents/picker';
 
 export const HomeScreen = () => {
   const { colors } = useTheme();
@@ -14,8 +14,8 @@ export const HomeScreen = () => {
 
   const handleOpenPdf = async () => {
     try {
-      const res = await DocumentPicker.pickSingle({
-        type: [DocumentPicker.types.pdf],
+      const [res] = await pick({
+        type: [types.pdf],
       });
       // Navigate to PdfReader with the selected file
       navigation.navigate('PdfReader', { 
@@ -27,7 +27,7 @@ export const HomeScreen = () => {
         }
       });
     } catch (err) {
-      if (!DocumentPicker.isCancel(err)) {
+      if (isErrorWithCode(err) && err.code !== errorCodes.OPERATION_CANCELED) {
         console.error('Error picking document:', err);
       }
     }

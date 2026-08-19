@@ -13,7 +13,7 @@ export type RootStackParamList = {
   PdfReader: { file: PdfFile };
   MergePdf: undefined;
   SplitPdf: undefined;
-  // Add more tools as needed
+  RotatePages: undefined;
 };
 
 export type MainTabParamList = {

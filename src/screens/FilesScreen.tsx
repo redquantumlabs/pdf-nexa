@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
-import DocumentPicker from '@react-native-documents/picker';
+import { pick, types, isErrorWithCode, errorCodes } from '@react-native-documents/picker';
 import { useNavigation } from '@react-navigation/native';
 import { ScreenContainer } from '../components/ScreenContainer';
 import { useTheme } from '../context/ThemeContext';
@@ -13,8 +13,8 @@ export const FilesScreen = () => {
 
   const handlePickFile = async () => {
     try {
-      const res = await DocumentPicker.pickSingle({
-        type: [DocumentPicker.types.pdf],
+      const [res] = await pick({
+        type: [types.pdf],
       });
       navigation.navigate('PdfReader', { 
         file: {
@@ -25,7 +25,7 @@ export const FilesScreen = () => {
         }
       });
     } catch (err) {
-      if (!DocumentPicker.isCancel(err)) {
+      if (isErrorWithCode(err) && err.code !== errorCodes.OPERATION_CANCELED) {
         console.error('Error picking document:', err);
       }
     }

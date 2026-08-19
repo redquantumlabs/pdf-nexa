@@ -20,7 +20,7 @@ export const ScreenContainer: React.FC<Props> = ({ children, style, noSafeArea =
   if (noSafeArea) {
     return (
       <View style={containerStyle}>
-        <StatusBar barStyle={theme === 'dark' ? 'light-content' : 'dark-content'} backgroundColor={colors.background} />
+        <StatusBar barStyle={theme === 'dark' ? 'light-content' : 'dark-content'} />
         {children}
       </View>
     );
@@ -28,7 +28,7 @@ export const ScreenContainer: React.FC<Props> = ({ children, style, noSafeArea =
 
   return (
     <SafeAreaView style={containerStyle}>
-      <StatusBar barStyle={theme === 'dark' ? 'light-content' : 'dark-content'} backgroundColor={colors.background} />
+      <StatusBar barStyle={theme === 'dark' ? 'light-content' : 'dark-content'} />
       {children}
     </SafeAreaView>
   );
