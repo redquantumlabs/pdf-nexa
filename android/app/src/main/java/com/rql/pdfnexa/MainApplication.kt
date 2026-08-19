@@ -1,4 +1,4 @@
-package com.pdfnexa
+package com.rql.pdfnexa
 
 import android.app.Application
 import com.facebook.react.PackageList

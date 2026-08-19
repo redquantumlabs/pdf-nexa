@@ -1,4 +1,4 @@
-package com.pdfnexa
+package com.rql.pdfnexa
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate
