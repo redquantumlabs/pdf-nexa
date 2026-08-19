@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import { ScreenContainer } from '../components/ScreenContainer';
@@ -9,12 +9,13 @@ import { TYPOGRAPHY, SPACING, BORDER_RADIUS } from '../constants/theme';
 
 export const SettingsScreen = () => {
   const { colors, themeType, setThemeType } = useTheme();
+  const [isThemeExpanded, setIsThemeExpanded] = useState(false);
 
-  const ThemeOption = ({ label, value }: { label: string, value: ThemeType }) => {
+  const ThemeOption = ({ label, value, isLast = false }: { label: string, value: ThemeType, isLast?: boolean }) => {
     const isSelected = themeType === value;
     return (
       <TouchableOpacity 
-        style={[styles.optionRow, { borderBottomColor: colors.border }]} 
+        style={[styles.subOptionRow, !isLast && { borderBottomColor: colors.border, borderBottomWidth: StyleSheet.hairlineWidth }]} 
         onPress={() => setThemeType(value)}
       >
         <Text style={[styles.optionText, { color: colors.text }]}>{label}</Text>
@@ -28,30 +29,44 @@ export const SettingsScreen = () => {
       <PageHeader title="Settings" iconName="settings" />
       <ScrollView style={styles.container} contentContainerStyle={{ padding: SPACING.lg }}>
         
-        <Text style={[styles.sectionTitle, { color: colors.textSecondary }]}>APPEARANCE</Text>
+        <Text style={[styles.sectionTitle, { color: colors.textSecondary, marginTop: 0 }]}>APPEARANCE</Text>
         <Card style={styles.cardContainer}>
-          <ThemeOption label="Light Mode" value="light" />
-          <ThemeOption label="Dark Mode" value="dark" />
-          <View style={styles.lastRow}>
-             <ThemeOption label="System Default" value="system" />
-          </View>
+          <TouchableOpacity 
+            style={[styles.optionRow, isThemeExpanded ? { borderBottomWidth: 0 } : { borderBottomColor: colors.border }]} 
+            onPress={() => setIsThemeExpanded(!isThemeExpanded)}
+          >
+            <View style={styles.rowLeft}>
+              <Icon name="moon" size={20} color={colors.text} style={styles.rowIcon} />
+              <Text style={[styles.optionText, { color: colors.text }]}>Theme</Text>
+            </View>
+            <View style={styles.rowRight}>
+              <Text style={[styles.currentValueText, { color: colors.textSecondary }]}>
+                {themeType === 'system' ? 'System Default' : themeType === 'dark' ? 'Dark Mode' : 'Light Mode'}
+              </Text>
+              <Icon name={isThemeExpanded ? "chevron-up" : "chevron-down"} size={20} color={colors.textSecondary} />
+            </View>
+          </TouchableOpacity>
+          
+          {isThemeExpanded && (
+            <View style={[styles.expandedContainer, { backgroundColor: colors.background, borderBottomColor: colors.border }]}>
+              <ThemeOption label="Light Mode" value="light" />
+              <ThemeOption label="Dark Mode" value="dark" />
+              <ThemeOption label="System Default" value="system" isLast={true} />
+            </View>
+          )}
         </Card>
 
         <Text style={[styles.sectionTitle, { color: colors.textSecondary }]}>ABOUT</Text>
         <Card style={styles.cardContainer}>
-          <View style={[styles.optionRow, { borderBottomColor: colors.border }]}>
-            <Text style={[styles.optionText, { color: colors.text }]}>Version</Text>
-            <Text style={{ color: colors.textSecondary }}>1.0.0</Text>
-          </View>
-          <View style={[styles.optionRow, { borderBottomColor: colors.border }]}>
+          <TouchableOpacity style={[styles.optionRow, { borderBottomColor: colors.border }]}>
             <Text style={[styles.optionText, { color: colors.text }]}>Privacy Policy</Text>
             <Icon name="chevron-right" size={20} color={colors.textSecondary} />
-          </View>
+          </TouchableOpacity>
           <View style={styles.lastRow}>
-            <View style={styles.optionRow}>
+            <TouchableOpacity style={styles.optionRow}>
               <Text style={[styles.optionText, { color: colors.text }]}>Terms of Use</Text>
               <Icon name="chevron-right" size={20} color={colors.textSecondary} />
-            </View>
+            </TouchableOpacity>
           </View>
         </Card>
       </ScrollView>
@@ -87,5 +102,31 @@ const styles = StyleSheet.create({
   },
   optionText: {
     ...TYPOGRAPHY.body1,
-  }
+  },
+  subOptionRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingVertical: SPACING.md,
+    paddingHorizontal: SPACING.lg,
+    paddingLeft: SPACING.xl * 1.5,
+  },
+  rowLeft: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  rowRight: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  rowIcon: {
+    marginRight: SPACING.md,
+  },
+  currentValueText: {
+    ...TYPOGRAPHY.body2,
+    marginRight: SPACING.sm,
+  },
+  expandedContainer: {
+    borderBottomWidth: StyleSheet.hairlineWidth,
+  },
 });
