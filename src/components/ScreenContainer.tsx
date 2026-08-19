@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, StyleSheet, SafeAreaView, ViewStyle, StatusBar } from 'react-native';
+import { View, StyleSheet, ViewStyle, StatusBar } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTheme } from '../context/ThemeContext';
 
 interface Props {
@@ -27,7 +28,7 @@ export const ScreenContainer: React.FC<Props> = ({ children, style, noSafeArea =
   }
 
   return (
-    <SafeAreaView style={containerStyle}>
+    <SafeAreaView style={containerStyle} edges={['top', 'bottom']}>
       <StatusBar barStyle={theme === 'dark' ? 'light-content' : 'dark-content'} />
       {children}
     </SafeAreaView>

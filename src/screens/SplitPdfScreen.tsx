@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, TextInput, Alert } from 'react-native';
 import { pick, types, isErrorWithCode, errorCodes } from '@react-native-documents/picker';
 import { useNavigation } from '@react-navigation/native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ScreenContainer } from '../components/ScreenContainer';
 import { Button } from '../components/Button';
 import { Card } from '../components/Card';
@@ -12,6 +13,7 @@ import { splitPdf } from '../services/pdf/splitPdf';
 export const SplitPdfScreen = () => {
   const { colors } = useTheme();
   const navigation = useNavigation<any>();
+  const insets = useSafeAreaInsets();
   
   const [selectedFile, setSelectedFile] = useState<any>(null);
   const [startPage, setStartPage] = useState('1');
@@ -98,7 +100,14 @@ export const SplitPdfScreen = () => {
           </Card>
         </View>
 
-        <View style={[styles.footer, { borderTopColor: colors.border, backgroundColor: colors.background }]}>
+        <View style={[
+          styles.footer, 
+          { 
+            borderTopColor: colors.border, 
+            backgroundColor: colors.background,
+            paddingBottom: Math.max(insets.bottom, SPACING.lg)
+          }
+        ]}>
           <Button 
             title={isProcessing ? "Processing..." : "Split PDF"} 
             onPress={handleSplit} 

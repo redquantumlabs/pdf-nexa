@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, FlatList, TouchableOpacity, Alert } from 'react
 import Icon from 'react-native-vector-icons/Feather';
 import { pick, types } from '@react-native-documents/picker';
 import { useNavigation } from '@react-navigation/native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ScreenContainer } from '../components/ScreenContainer';
 import { Button } from '../components/Button';
 import { useTheme } from '../context/ThemeContext';
@@ -12,6 +13,7 @@ import { mergePdfs } from '../services/pdf/mergePdf';
 export const MergePdfScreen = () => {
   const { colors } = useTheme();
   const navigation = useNavigation<any>();
+  const insets = useSafeAreaInsets();
   const [selectedFiles, setSelectedFiles] = useState<any[]>([]);
   const [isMerging, setIsMerging] = useState(false);
 
@@ -108,7 +110,14 @@ export const MergePdfScreen = () => {
           }
         />
 
-        <View style={[styles.footer, { borderTopColor: colors.border, backgroundColor: colors.background }]}>
+        <View style={[
+          styles.footer, 
+          { 
+            borderTopColor: colors.border, 
+            backgroundColor: colors.background,
+            paddingBottom: Math.max(insets.bottom, SPACING.lg) 
+          }
+        ]}>
           <Button 
             title="+ Add Files" 
             variant="outline" 
