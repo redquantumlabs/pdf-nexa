@@ -84,10 +84,11 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0.0"
+        resValue "string", "app_name", "PDFNexa"
     }
     signingConfigs {
         debug {
-            storeFile file(' upload-keystore.jks')
+            storeFile file('upload-keystore.jks')
             storePassword 'rql_111'
             keyAlias 'upload'
             keyPassword 'rql_111'
@@ -95,6 +96,8 @@ android {
     }
     buildTypes {
         debug {
+            applicationIdSuffix ".dev"
+            resValue "string", "app_name", "PDFNexa Dev"
             signingConfig signingConfigs.debug
         }
         release {
